@@ -1,5 +1,10 @@
 package za.ac.cput.Domain;
 
+/*
+    Payment Model Class
+    Author: Sheldon Luke Arendse 221190384
+    Date: 21 March 2024
+*/
 import java.util.Objects;
 
 public class Payment extends Order{
