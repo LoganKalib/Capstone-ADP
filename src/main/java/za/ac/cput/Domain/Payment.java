@@ -5,91 +5,92 @@ package za.ac.cput.Domain;
     Author: Sheldon Luke Arendse 221190384
     Date: 21 March 2024
 */
+import jakarta.persistence.Id;
+import java.util.Date;
 import java.util.Objects;
 
 public class Payment extends Order{
-    private final String name, surname, email, password;
-    private final long contactInfo;
+    private final String paymentId;
+    private final String payMethod;
+    private final double amount;
+    private final Date payDate;
 
     private Payment(Builder obj) {
-        this.name =obj.name;
-        this.surname = obj.surname;
-        this.email = obj.email;
-        this.password = obj.password;
-        this.contactInfo = obj.contactInfo;
+        this.paymentId = obj.paymentId;
+        this.payMethod = obj.payMethod;
+        this.amount = obj.amount;
+        this.payDate = obj.payDate;
     }
 
-    public String getName() { return name; }
+    public String getPaymentId() {
+        return paymentId;
+    }
 
-    public String getSurname() { return surname; }
+    public String getPayMethod() {
+        return payMethod;
+    }
 
-    public String getEmail() { return email; }
+    public double getAmount() {
+        return amount;
+    }
 
-    public String getPassword() { return password; }
-
-    public long getContactInfo() { return contactInfo; }
+    public Date getPayDate() {
+        return payDate;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Payment payment)) return false;
-        return getContactInfo() == payment.getContactInfo() && Objects.equals(getName(),
-                payment.getName()) && Objects.equals(getSurname(), payment.getSurname())
-                && Objects.equals(getEmail(), payment.getEmail())
-                && Objects.equals(getPassword(), payment.getPassword());
+        return Double.compare(getAmount(), payment.getAmount()) == 0 && Objects.equals(getPaymentId(), payment.getPaymentId()) && Objects.equals(getPayMethod(), payment.getPayMethod()) && Objects.equals(getPayDate(), payment.getPayDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getSurname(), getEmail(), getPassword(), getContactInfo());
+        return Objects.hash(getPaymentId(), getPayMethod(), getAmount(), getPayDate());
     }
 
     @Override
     public String toString() {
         return "Payment{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", contactInfo=" + contactInfo +
+                "paymentID='" + paymentId + '\'' +
+                ", payMethod='" + payMethod + '\'' +
+                ", amount=" + amount +
+                ", payDate=" + payDate +
                 '}';
     }
 
     public static class Builder {
-        private String name, surname, email, password;
-        private long contactInfo;
+        private String paymentId;
+        private String payMethod;
+        private double amount;
+        private Date payDate;
 
-        public Builder setName(String name) {
-            this.name = name;
+        public Builder setPaymentId(String paymentId) {
+            this.paymentId = paymentId;
             return this;
         }
 
-        public Builder setSurname(String surname) {
-            this.surname = surname;
+        public Builder setPayMethod(String payMethod) {
+            this.payMethod = payMethod;
             return this;
         }
 
-        public Builder setEmail(String email) {
-            this.email = email;
+        public Builder setAmount(double amount) {
+            this.amount = amount;
             return this;
         }
 
-        public Builder setPassword(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public Builder setContactInfo(long contactInfo) {
-            this.contactInfo = contactInfo;
+        public Builder setPayDate(Date payDate) {
+            this.payDate = payDate;
             return this;
         }
 
         public Builder copy(Payment obj) {
-            this.name =obj.name;
-            this.surname = obj.surname;
-            this.email = obj.email;
-            this.password = obj.password;
-            this.contactInfo = obj.contactInfo;
+            this.paymentId = obj.paymentId;
+            this.payMethod = obj.payMethod;
+            this.amount = obj.amount;
+            this.payDate = obj.payDate;
             return this;
         }
 
@@ -97,6 +98,4 @@ public class Payment extends Order{
             return new Payment(this);
         }
     }
-
-
 }
